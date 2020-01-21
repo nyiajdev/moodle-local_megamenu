@@ -1,0 +1,23 @@
+<button id="megamenu-{{uniqueid}}-toggle" data-toggle="dropdown" data-target="#megamenu-{{uniqueid}}" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle d-inline btn btn-link">{{dropdowntogglelabel}}</button>
+<div aria-labelledby="megamenu" id="megamenu-{{uniqueid}}" class="dropdown-menu w-100 border-0 p-0 m-0">
+    <div class="container-fluid">
+        <div class="row bg-white rounded-0 m-0 shadow-lg w-100">
+            <div class="col">
+                <div class="p-4">
+                    <div class="row">
+                        {{#lists}}
+                            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                                <h6 class="font-weight-bold text-uppercase">{{heading}}</h6>
+                                <ul class="list-unstyled">
+                                    {{#items}}
+                                        <li class="nav-item"><a href="{{url}}" class="nav-link text-small pb-0">{{label}}</a></li>
+                                    {{/items}}
+                                </ul>
+                            </div>
+                        {{/lists}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
