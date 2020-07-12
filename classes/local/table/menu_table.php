@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Table to list menus.
+ *
  * @package    local_megamenu
  * @copyright  2020 NYIAJ LLC
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -35,11 +37,16 @@ require_once($CFG->libdir . '/tablelib.php');
  * Table to list menus.
  *
  * @package local_megamenu
+ * @copyright  2020 NYIAJ LLC
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class menu_table extends \table_sql
 {
     /**
+     * Build new table.
+     *
      * @param string $uniqueid
+     * @throws coding_exception
      */
     public function __construct($uniqueid) {
         parent::__construct($uniqueid);
@@ -61,6 +68,13 @@ class menu_table extends \table_sql
         $this->define_headers($headers);
     }
 
+    /**
+     * Menu name.
+     *
+     * @param $data
+     * @return string
+     * @throws moodle_exception
+     */
     public function col_name($data) {
         return \html_writer::link(new \moodle_url('/local/megamenu/menu.php', [
             'id' => $data->id,
@@ -68,6 +82,13 @@ class menu_table extends \table_sql
         ]), $data->name);
     }
 
+    /**
+     * If menu is enabled.
+     *
+     * @param $data
+     * @return string
+     * @throws coding_exception
+     */
     public function col_enabled($data) {
         if ($data->enabled) {
             return sprintf('<span class="badge badge-success">%s</span>', get_string('enabled', 'local_megamenu'));
@@ -96,6 +117,8 @@ class menu_table extends \table_sql
     }
 
     /**
+     * Get menu data for display in table.
+     *
      * @param int $pagesize
      * @param bool $useinitialsbar
      * @throws dml_exception

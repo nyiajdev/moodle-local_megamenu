@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Represents a single menu to be rendered. Menu fields stored in database.
+ *
  * @package    local_megamenu
  * @copyright  2020 NYIAJ LLC
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -35,8 +37,15 @@ use templatable;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Represents a single menu to be rendered. Menu fields stored in database.
+ *
+ * @package local_megamenu\local\persistent
+ */
 class menu extends \core\persistent implements menu_interface, renderable, templatable {
-
+    /**
+     * Table name.
+     */
     const TABLE = 'local_megamenu_menu';
 
     /**
@@ -45,6 +54,8 @@ class menu extends \core\persistent implements menu_interface, renderable, templ
     private $context;
 
     /**
+     * Set context this menu is rendered in. Must be set before rendering.
+     *
      * @param context $context
      */
     public function set_context(context $context): void {
@@ -101,6 +112,8 @@ class menu extends \core\persistent implements menu_interface, renderable, templ
     }
 
     /**
+     * Get required capability objects for viewing this menu.
+     *
      * @return array
      * @throws dml_exception|coding_exception
      */
@@ -117,6 +130,8 @@ class menu extends \core\persistent implements menu_interface, renderable, templ
     }
 
     /**
+     * Get context this menu is displayed in.
+     *
      * @return context
      * @throws coding_exception
      */
@@ -135,6 +150,7 @@ class menu extends \core\persistent implements menu_interface, renderable, templ
      *
      * @param renderer_base $output Used to do a final render of any components that need to be rendered for export.
      * @return stdClass|array
+     * @SuppressWarnings("unused")
      */
     public function export_for_template(renderer_base $output) {
         $data = [

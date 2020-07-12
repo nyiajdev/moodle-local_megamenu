@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Used for creating or editing menus.
+ *
  * @package    local_megamenu
  * @copyright  2020 NYIAJ LLC
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -27,6 +29,11 @@ use stdClass;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Used for creating or editing menus.
+ *
+ * @package local_megamenu\local\form
+ */
 class menu_form extends \core\form\persistent {
     /** @var string Persistent class name. */
     protected static $persistentclass = 'local_megamenu\\local\\persistent\\menu';

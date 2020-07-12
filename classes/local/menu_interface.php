@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Plugin version info
+ * Represents a single menu to be rendered.
  *
  * @package    local_megamenu
  * @copyright  2020 NYIAJ LLC
@@ -26,6 +26,11 @@ namespace local_megamenu\local;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Represents a single menu to be rendered.
+ *
+ * @package local_megamenu\local
+ */
 interface menu_interface {
 
     /**
@@ -37,6 +42,8 @@ interface menu_interface {
     public function check_access(int $userid): bool;
 
     /**
+     * Get required capability objects for viewing this menu.
+     *
      * @return array
      */
     public function get_required_capabilities(): array;

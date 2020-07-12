@@ -26,6 +26,13 @@ use local_megamenu\local\persistent\menu;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Render content to navbar.
+ *
+ * @param renderer_base $renderer
+ * @return string
+ * @throws coding_exception
+ */
 function local_megamenu_render_navbar_output(\renderer_base $renderer) {
     global $PAGE, $USER;
     $output = '';
