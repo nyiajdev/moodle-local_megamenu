@@ -40,6 +40,9 @@ class menu_form extends \core\form\persistent {
     /** @var string Persistent class name. */
     protected static $persistentclass = 'local_megamenu\\local\\persistent\\menu';
 
+    /** @var array Fields to remove from the persistent validation. */
+    protected static $foreignfields = ['image'];
+
     /**
      * Define the form.
      */
@@ -62,6 +65,10 @@ class menu_form extends \core\form\persistent {
         $mform->addElement('autocomplete', 'coursecategories', get_string('coursecategories', 'local_megamenu'),
             \core_course_category::make_categories_list(), ['multiple' => true]);
         $mform->addHelpButton('coursecategories', 'coursecategories', 'local_megamenu');
+
+        $mform->addElement('filemanager', 'image', get_string('image', 'local_megamenu'), null,
+            ['subdirs' => 0, 'maxfiles' => 1, 'accepted_types' => ['image']]);
+        $mform->addHelpButton('image', 'image', 'local_megamenu');
 
         $mform->addElement('header', 'restrictaccess', get_string('restrictaccess', 'local_megamenu'));
 

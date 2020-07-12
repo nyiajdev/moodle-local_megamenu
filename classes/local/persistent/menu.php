@@ -163,6 +163,22 @@ class menu extends \core\persistent implements menu_interface, renderable, templ
             'uniqueid' => $this->get('id')
         ];
 
+        $fs = get_file_storage();
+        $files = $fs->get_area_files(\context_system::instance()->id, 'local_megamenu', 'menuimages', $this->get('id'));
+        foreach ($files as $file) {
+            if ($file->is_valid_image()) {
+                $data['hasimage'] = true;
+                $data['imageurl'] = moodle_url::make_pluginfile_url(
+                    $file->get_contextid(),
+                    $file->get_component(),
+                    $file->get_filearea(),
+                    $file->get_itemid(),
+                    $file->get_filepath(),
+                    $file->get_filename()
+                );
+            }
+        }
+
         $displaycategories = $this->get('coursecategories') ? explode(',', $this->get('coursecategories')) : [];
 
         foreach ($displaycategories as $categoryid) {

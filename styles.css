@@ -1,0 +1,4 @@
+/* Add stylistic bar to unordered lists in mega menu */
+.megamenu.dropdown-menu ul.megamenu-list {
+    border-left: 3px solid #f2f2f2;
+}

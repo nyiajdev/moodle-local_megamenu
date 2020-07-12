@@ -52,8 +52,13 @@ switch ($action) {
         ]);
 
         if ($data = $form->get_data()) {
+            $image = $data->image;
+            unset($data->image);
             $menu = new menu(0, $data);
             $menu->create();
+
+            file_save_draft_area_files($image, \context_system::instance()->id, 'local_megamenu', 'menuimages',
+                $menu->get('id'), ['subdirs' => 0, 'maxfiles' => 1]);
 
             \core\notification::success(get_string('menucreated', 'local_megamenu', $menu->to_record()));
             redirect(new moodle_url('/local/megamenu/menus.php'));
@@ -83,13 +88,25 @@ switch ($action) {
         ]);
 
         if ($data = $form->get_data()) {
+            $image = $data->image;
+            unset($data->image);
             $menu->from_record($data);
             $menu->update();
+
+            file_save_draft_area_files($image, \context_system::instance()->id, 'local_megamenu', 'menuimages',
+                $menu->get('id'), ['subdirs' => 0, 'maxfiles' => 1]);
 
             \core\notification::success(get_string('menuedited', 'local_megamenu', $menu->to_record()));
             redirect(new moodle_url('/local/megamenu/menus.php'));
         } else if ($form->is_cancelled()) {
             redirect(new moodle_url('/local/megamenu/menus.php'));
+        } else {
+            $draftitemid = file_get_submitted_draft_itemid('image');
+
+            file_prepare_draft_area($draftitemid, \context_system::instance()->id, 'local_megamenu', 'menuimages',
+                $menu->get('id'), ['subdirs' => 0, 'maxfiles' => 1]);
+
+            $form->set_data(['image' => $draftitemid]);
         }
 
         echo $OUTPUT->header();

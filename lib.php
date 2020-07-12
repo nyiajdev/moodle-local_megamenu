@@ -35,12 +35,43 @@ defined('MOODLE_INTERNAL') || die();
  */
 function local_megamenu_render_navbar_output(\renderer_base $renderer) {
     global $PAGE, $USER;
-    $output = '';
-    foreach (menu::get_records(['enabled' => true]) as $menu) {
-        $menu->set_context($PAGE->context);
-        if ($menu->check_access($USER->id)) {
-            $output .= $renderer->render($menu);
+    try {
+        $output = '';
+        foreach (menu::get_records(['enabled' => true]) as $menu) {
+            $menu->set_context($PAGE->context);
+            if ($menu->check_access($USER->id)) {
+                $output .= $renderer->render($menu);
+            }
         }
+    } catch (Exception $e) {
+        // Catch all exceptions since every page will be running this code.
+        // This will prevent system wide outage if there's an issue with menus.
+        debugging('Menu error: ' . $e->getMessage());
     }
     return $output;
+}
+
+/**
+ * Files support.
+ *
+ * @param stdClass $course course object
+ * @param stdClass $cm
+ * @param stdClass $context context object
+ * @param string $filearea file area
+ * @param array $args extra arguments
+ * @param bool $forcedownload whether or not force download
+ * @param array $options additional options affecting the file serving
+ * @return void The file is sent along with it's headers
+ */
+function local_megamenu_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = []) {
+
+    // Menu images are publicly accessible.
+    if ($filearea == 'menuimages') {
+        $fs = get_file_storage();
+        $file = $fs->get_file($context->id, 'local_megamenu', $filearea, $args[0], '/', $args[1]);
+
+        send_stored_file($file);
+    }
+
+    // Let other requests fail for now.
 }
