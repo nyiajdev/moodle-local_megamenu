@@ -2,6 +2,8 @@
 
 Enhance Boost and Boostrap 4 compatible themes with a mega menu to display courses.
 
+![Mega menu preview](https://raw.githubusercontent.com/nyiajdev/moodle-local_megamenu/master/pix/preview.png)
+
 FEATURES
 
 * Displays dropdown links near profile on navbar
