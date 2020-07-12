@@ -37,7 +37,7 @@ defined('MOODLE_INTERNAL') || die();
 
 class menu extends \core\persistent implements menu_interface, renderable, templatable {
 
-    const TABLE = 'megamenu_menu';
+    const TABLE = 'local_megamenu_menu';
 
     /**
      * @var context

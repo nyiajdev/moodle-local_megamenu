@@ -27,6 +27,8 @@ use dml_exception;
 use moodle_exception;
 use stdClass;
 
+defined('MOODLE_INTERNAL') || die();
+
 require_once($CFG->libdir . '/tablelib.php');
 
 /**
@@ -57,13 +59,6 @@ class menu_table extends \table_sql
 
         $this->define_columns($columns);
         $this->define_headers($headers);
-
-        //$this->no_sorting('');
-
-        // Set help icons.
-        $this->define_help_for_headers([
-            //'1' => new \help_icon('views', 'videotime'),
-        ]);
     }
 
     public function col_name($data) {
@@ -105,13 +100,12 @@ class menu_table extends \table_sql
      * @param bool $useinitialsbar
      * @throws dml_exception
      */
-    function query_db($pagesize, $useinitialsbar = true)
-    {
+    public function query_db($pagesize, $useinitialsbar = true) {
         global $DB;
 
         list($wsql, $params) = $this->get_sql_where();
 
-        $sql = 'SELECT * FROM {megamenu_menu} m ' . $wsql;
+        $sql = 'SELECT * FROM {local_megamenu_menu} m ' . $wsql;
 
         $sort = $this->get_sql_sort();
         if ($sort) {
@@ -119,8 +113,8 @@ class menu_table extends \table_sql
         }
 
         if ($pagesize != -1) {
-            $count_sql = 'SELECT COUNT(DISTINCT m.id) FROM {megamenu_menu} m ' . $wsql;
-            $total = $DB->count_records_sql($count_sql, $params);
+            $countsql = 'SELECT COUNT(DISTINCT m.id) FROM {local_megamenu_menu} m ' . $wsql;
+            $total = $DB->count_records_sql($countsql, $params);
             $this->pagesize($pagesize, $total);
         } else {
             $this->pageable(false);

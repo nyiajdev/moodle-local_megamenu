@@ -26,8 +26,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $ADMIN->add('localplugins', new admin_category('localmegamenusettings', get_string('pluginname', 'local_megamenu')));
 
-//$ADMIN->add('blockdashfolder', $settings);
-//// Tell core we already added the settings structure.
+// Tell core we already added the settings structure.
 $settings = null;
 
 $ADMIN->add('localmegamenusettings', new admin_externalpage(

@@ -24,6 +24,8 @@
 
 namespace local_megamenu\local;
 
+defined('MOODLE_INTERNAL') || die();
+
 interface menu_interface {
 
     /**
