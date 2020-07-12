@@ -27,5 +27,5 @@ defined('MOODLE_INTERNAL') || die;
 $plugin->version   = 2020071111;
 $plugin->requires  = 2017051509;
 $plugin->maturity  = MATURITY_ALPHA;
-$plugin->release = '1.0';
+$plugin->release = '1.0.1';
 $plugin->component = 'local_megamenu';
