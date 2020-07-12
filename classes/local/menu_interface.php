@@ -29,7 +29,7 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Represents a single menu to be rendered.
  *
- * @package local_megamenu\local
+ * @package local_megamenu
  */
 interface menu_interface {
 

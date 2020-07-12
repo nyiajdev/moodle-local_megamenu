@@ -29,6 +29,7 @@ use local_megamenu\local\menu_interface;
 use context;
 use core_course_category;
 use dml_exception;
+use moodle_exception;
 use moodle_url;
 use renderable;
 use renderer_base;
@@ -40,7 +41,9 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Represents a single menu to be rendered. Menu fields stored in database.
  *
- * @package local_megamenu\local\persistent
+ * @package    local_megamenu
+ * @copyright  2020 NYIAJ LLC
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class menu extends \core\persistent implements menu_interface, renderable, templatable {
     /**
@@ -150,7 +153,8 @@ class menu extends \core\persistent implements menu_interface, renderable, templ
      *
      * @param renderer_base $output Used to do a final render of any components that need to be rendered for export.
      * @return stdClass|array
-     * @SuppressWarnings("unused")
+     * @throws moodle_exception
+     * @throws coding_exception
      */
     public function export_for_template(renderer_base $output) {
         $data = [

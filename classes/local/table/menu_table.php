@@ -71,7 +71,7 @@ class menu_table extends \table_sql
     /**
      * Menu name.
      *
-     * @param $data
+     * @param stdClass $data
      * @return string
      * @throws moodle_exception
      */
@@ -85,7 +85,7 @@ class menu_table extends \table_sql
     /**
      * If menu is enabled.
      *
-     * @param $data
+     * @param stdClass $data
      * @return string
      * @throws coding_exception
      */
